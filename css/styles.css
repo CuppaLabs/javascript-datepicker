@@ -1,0 +1,142 @@
+body{
+    font-family: 'Roboto',sans-serif;
+}
+*{
+	box-sizing: border-box;
+}
+#container, #container2{
+	width: 250px;
+    text-align: center;
+    margin: 0px auto;
+}
+.winkel-calendar{
+    font-size: 14px;
+    box-shadow: 0px 7px 23px 0px #e7e7e7;
+    margin: 0px auto;
+    perspective: 1000px;
+}
+.wc-banner{
+    /* background: #3ce5ed; */
+    background: #FF2D55;
+    float: left;
+    width: 100%;
+}
+.wc-day-row{
+    padding: 5px 0px;
+    background: rgba(0, 0, 0, 0.07);
+    color: #fff;
+    width: 100%;
+    float: left;
+}
+.wc-date-row{
+    display: inline-block;
+    font-size: 62px;
+    color: #fff;
+    padding: 15px 5px;
+    width: 50%;
+    float: left;
+    text-align: right;
+    font-weight: 200;    
+}
+.wc-month-row{
+	padding: 0px 0px 8px 0px;
+    font-size: 21px;
+    color: #fff;
+    width: 100%;
+    float: left;
+}
+.wc-year-row{
+	text-align: left;
+    color: rgba(255, 255, 255, 0.79);
+    font-size: 16px;
+    float: left;
+    width: 100%;
+}
+.wc-my-sec{
+	display: inline-block;
+	padding: 25px 5px;
+	float: left;
+    width: 50%;
+    font-weight: 300;
+}
+.wc-month-row > div:nth-child(1), .wc-year-row > div:nth-child(1){
+	float: left;
+    text-align: left;
+}
+
+.wc-month-controls > .fa{
+	cursor: pointer;
+	padding: 0px 2px;
+}
+.wc-month-controls > .fa:hover{
+	color: #fff;
+}
+.wc-month-controls{
+    padding: 9px 5px 0px 5px;
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.71);
+    float: right;
+    transform: rotate(90deg);
+}
+.wc-year-controls{
+	padding: 4px 5px 0px 5px;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.71);
+    float: right;
+}
+.wc-year-controls > i:nth-child(1){
+	margin-right: 4px;
+}
+
+.wc-details{
+    float: left;
+    width: 100%;	
+}
+.wc-prev, .wc-next{
+	
+}
+.wc-prev{
+	float: left;
+	width:25%;
+}
+.month-year{
+	float: left;
+	width:50%;
+}
+.wc-next{
+	float: right;
+	width:25%;
+}
+.calendar-days{
+	color: #07c;	
+}
+.today{
+	border: 1px solid #3ce5ed;
+    background: none;
+    border-radius: 50px;
+}
+.selected-day{
+	background: #3ce5ed;
+    color: #fff;
+    border-radius: 50px;
+}
+
+.calendar-days td{
+	cursor: pointer;
+}
+.calendar-days td:hover{
+	background: #3ce5ed;
+    color: #fff;
+    border-radius: 50px;
+}
+.winkel-calendar table{
+	width: 100%;
+	text-align: center;
+	font-weight: 300;
+}
+.winkel-calendar table td{
+	padding: 7px 0px;
+	text-align: center;
+	width: 14.2%;
+	transition: all .1s linear;
+}
