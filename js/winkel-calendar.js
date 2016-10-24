@@ -79,7 +79,7 @@
 		      current_day = self.date.getDate();
 		// get first day of month
 		  var firstDay = new Date(year, month, 1);
-		  var bigBanner = null;
+		  self.el.bigBanner = null;
 		  // find number of days in month
 		  var monthLength = cal_days_in_month[self.date.getMonth()];
 		  
@@ -94,70 +94,73 @@
 		  var monthName = cal_months_labels[month];
 		  self.el.setAttribute('class','winkel-calendar');
 		  if(self.options.bigBanner){
-			  bigBanner = document.createElement('div');
-			  bigBanner.setAttribute('class','wc-banner');
-			  var dayRow = document.createElement('div');
-			  dayRow.setAttribute('class','wc-day-row');
-			  dayRow.textContent = cal_full_days_lables[self.date.getDay()];
+			  self.el.bigBanner = document.createElement('div');
+			  self.el.bigBanner.setAttribute('class','wc-banner');
+			  self.el.bigBanner.dayRow = document.createElement('div');
+			  self.el.bigBanner.dayRow.setAttribute('class','wc-day-row');
+			  self.el.bigBanner.dayRow.textContent = cal_full_days_lables[self.date.getDay()];
+			  self.el.bigBanner.appendChild(self.el.bigBanner.dayRow);
+
+
+			  self.el.bigBanner.monthAndYear = document.createElement('div');
+			  self.el.bigBanner.monthAndYear.setAttribute('class', 'wc-my-sec');
 			  
-			  var monthAndYear = document.createElement('div');
-			  monthAndYear.setAttribute('class', 'wc-my-sec');
+			  self.el.bigBanner.monthRow = document.createElement('div');
+			  self.el.bigBanner.monthRow.setAttribute('class','wc-month-row');
+			  self.el.bigBanner.monthHeaderName = document.createElement('div');
+			  self.el.bigBanner.monthHeaderName.textContent = cal_months_labels_short[self.date.getMonth()];
+			  self.el.bigBanner.monthRow.appendChild(self.el.bigBanner.monthHeaderName);
 			  
-			  var monthRow = document.createElement('div');
-			  monthRow.setAttribute('class','wc-month-row');
-			  var monthHeaderName = document.createElement('div');
-			  monthHeaderName.textContent = cal_months_labels_short[self.date.getMonth()];
-			  monthRow.appendChild(monthHeaderName);
+			  self.el.bigBanner.monthControls = document.createElement('div');
+			  self.el.bigBanner.monthControls.setAttribute('class', 'wc-month-controls');
 			  
-			  var monthControls = document.createElement('div');
-			  monthControls.setAttribute('class', 'wc-month-controls');
+			  self.el.bigBanner.prevMonthIcon = document.createElement('i');
+			  self.el.bigBanner.prevMonthIcon.setAttribute('class', 'fa fa-angle-left');
+			  self.el.bigBanner.prevMonthIcon.addEventListener('click', self.prevMonth.bind(this), false);
+			  self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.prevMonthIcon);
 			  
-			  var prevMonthIcon = document.createElement('i');
-			  prevMonthIcon.setAttribute('class', 'fa fa-angle-left');
-			  prevMonthIcon.addEventListener('click', self.prevMonth.bind(this), false);
-			  monthControls.appendChild(prevMonthIcon);
-			  
-			  var nextMonthIcon = document.createElement('i');
-			  nextMonthIcon.setAttribute('class', 'fa fa-angle-right');
-			  nextMonthIcon.addEventListener('click', self.nextMonth.bind(this), false);
-			  monthControls.appendChild(nextMonthIcon);
-			  monthRow.appendChild(monthControls);
-			  var dateRow = document.createElement('div');
-			  dateRow.setAttribute('class','wc-date-row');
+			  self.el.bigBanner.nextMonthIcon = document.createElement('i');
+			  self.el.bigBanner.nextMonthIcon.setAttribute('class', 'fa fa-angle-right');
+			  self.el.bigBanner.nextMonthIcon.addEventListener('click', self.nextMonth.bind(this), false);
+			  self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.nextMonthIcon);
+			  self.el.bigBanner.monthRow.appendChild(self.el.bigBanner.monthControls);
+			  self.el.bigBanner.dateRow = document.createElement('div');
+			  self.el.bigBanner.dateRow.setAttribute('class','wc-date-row');
 			  if(self.date.getDate() < 10){
-				  dateRow.textContent = "0"+self.date.getDate();
+				  self.el.bigBanner.dateRow.textContent = "0"+self.date.getDate();
 			  }
 			  else
-			  dateRow.textContent = self.date.getDate();
+			  self.el.bigBanner.dateRow.textContent = self.date.getDate();
 			  
-			  var yearRow = document.createElement('div');
-			  yearRow.setAttribute('class','wc-year-row');
-			  var yearVal = document.createElement('div');
-			  yearVal.textContent = self.date.getFullYear();
-			  yearRow.appendChild(yearVal);
+			  self.el.bigBanner.yearRow = document.createElement('div');
+			  self.el.bigBanner.yearRow.setAttribute('class','wc-year-row');
+			  self.el.bigBanner.yearVal = document.createElement('div');
+			  self.el.bigBanner.yearVal.textContent = self.date.getFullYear();
+			  self.el.bigBanner.yearRow.appendChild(self.el.bigBanner.yearVal);
 			  
-			  var yearControls = document.createElement('div');
-			  yearControls.setAttribute('class', 'wc-year-controls');
+			  self.el.bigBanner.yearControls = document.createElement('div');
+			  self.el.bigBanner.yearControls.setAttribute('class', 'wc-year-controls');
 			  
-			  var prevYearIcon = document.createElement('i');
-			  prevYearIcon.setAttribute('class', 'fa fa-minus');
-			  prevYearIcon.addEventListener('click', self.prevYear.bind(this), false);
-			  yearControls.appendChild(prevYearIcon);
+			  self.el.bigBanner.prevYearIcon = document.createElement('i');
+			  self.el.bigBanner.prevYearIcon.setAttribute('class', 'fa fa-minus');
+			  self.el.bigBanner.prevYearIcon.addEventListener('click', self.prevYear.bind(this), false);
+			  self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.prevYearIcon);
 			  
-			  var nextYearIcon = document.createElement('i');
-			  nextYearIcon.setAttribute('class', 'fa fa-plus');
-			  nextYearIcon.addEventListener('click', self.nextYear.bind(this), false);
-			  yearControls.appendChild(nextYearIcon);
-			  yearRow.appendChild(yearControls);
+			  self.el.bigBanner.nextYearIcon = document.createElement('i');
+			  self.el.bigBanner.nextYearIcon.setAttribute('class', 'fa fa-plus');
+			  self.el.bigBanner.nextYearIcon.addEventListener('click', self.nextYear.bind(this), false);
+			  self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.nextYearIcon);
+			  self.el.bigBanner.yearRow.appendChild(self.el.bigBanner.yearControls);
 			  
-			  bigBanner.appendChild(dayRow);
-			  bigBanner.appendChild(dateRow);
 			  
-			  monthAndYear.appendChild(monthRow);
-			  monthAndYear.appendChild(yearRow);
+			  self.el.bigBanner.appendChild(self.el.bigBanner.dateRow);
 			  
-			  bigBanner.appendChild(monthAndYear);
-			  self.el.appendChild(bigBanner);
+			  self.el.bigBanner.monthAndYear.appendChild(self.el.bigBanner.monthRow);
+			  self.el.bigBanner.monthAndYear.appendChild(self.el.bigBanner.yearRow);
+			  
+			  self.el.bigBanner.appendChild(self.el.bigBanner.monthAndYear);
+			  self.el.appendChild(self.el.bigBanner);
+			  console.log(self);
 		  }
 		  var headerDetails = document.createElement('div');
 		  headerDetails.setAttribute('class','wc-details');
@@ -290,14 +293,19 @@
 	}
 	WinkelCalendar.prototype.updateHeader = function(){
 		if(this.options.bigBanner){
-			this.el.children[0].children[0].innerHTML = "";
+			console.log();
+			this.el.bigBanner.dayRow.textContent = cal_full_days_lables[this.date.getDay()];
+			this.el.bigBanner.monthHeaderName.textContent = cal_months_labels_short[this.date.getMonth()];
+			this.el.bigBanner.dateRow.textContent = this.date.getDate() < 10 ? ("0"+this.date.getDate()) : this.date.getDate();
+			this.el.bigBanner.yearVal.textContent = this.date.getFullYear();
+		/*	this.el.children[0].children[0].innerHTML = "";
 			this.el.children[0].children[1].innerHTML = "";
 			this.el.children[0].children[2].children[0].children[0].innerHTML = "";
 			this.el.children[0].children[2].children[1].innerHTML = "";
 			this.el.children[0].children[0].innerHTML = cal_full_days_lables[this.date.getDay()];
 			this.el.children[0].children[1].innerHTML = this.date.getDate() < 10 ? ("0"+this.date.getDate()) : this.date.getDate();
 			this.el.children[0].children[2].children[0].children[0].innerHTML = cal_months_labels_short[this.date.getMonth()];
-			this.el.children[0].children[2].children[1].innerHTML = this.date.getFullYear();
+			this.el.children[0].children[2].children[1].innerHTML = this.date.getFullYear();*/
 		}
 		else{
 			this.el.children[0].children[1].innerHTML = "";
