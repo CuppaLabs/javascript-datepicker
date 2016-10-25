@@ -15,6 +15,8 @@ body{
     height: 30px;
     border: 1px solid #CCC;
     margin-bottom: 1px;
+    font-size: 16px;
+    padding: 5px;
 }
 .winkel-calendar{
     font-size: 14px;
