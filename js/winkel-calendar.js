@@ -89,7 +89,7 @@
 			this.el.style.display = "none";
 	}
 	WinkelCalendar.prototype.setDateVal = function(){
-			this.el.inputContainer.value = this.date;
+			this.el.inputContainer.value = moment(this.date).format('DD/MM/YYYY');
 	}
 	WinkelCalendar.prototype.createHeaderView = function(){
 
