@@ -80,6 +80,7 @@
 		 document.getElementById(this.options.container).appendChild(this.el.inputContainer);
 		 this.el.style.display = "none";
 		 document.getElementById(this.options.container).appendChild(this.el);
+		 this.setDateVal();
 		 
 	}
 	WinkelCalendar.prototype.show = function(){
