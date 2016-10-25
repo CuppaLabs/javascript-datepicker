@@ -70,6 +70,26 @@
 		  this.createHeaderView();
 		  this.createDaysView();
 		  this.attachEvents();
+		  this.init();
+	}
+	WinkelCalendar.prototype.init = function(){
+		 this.el.inputContainer = document.createElement('INPUT');
+		 this.el.inputContainer.setAttribute('type','text');
+		 this.el.inputContainer.setAttribute('class','wc-input');
+		 this.el.inputContainer.addEventListener('click', this.show.bind(this), false);
+		 document.getElementById(this.options.container).appendChild(this.el.inputContainer);
+		 this.el.style.display = "none";
+		 document.getElementById(this.options.container).appendChild(this.el);
+		 
+	}
+	WinkelCalendar.prototype.show = function(){
+		this.el.style.display = "block";
+	}
+	WinkelCalendar.prototype.hide = function(){
+			this.el.style.display = "none";
+	}
+	WinkelCalendar.prototype.setDateVal = function(){
+			this.el.inputContainer.value = this.date;
 	}
 	WinkelCalendar.prototype.createHeaderView = function(){
 
@@ -162,26 +182,26 @@
 			  self.el.appendChild(self.el.bigBanner);
 			  console.log(self);
 		  }
-		  var headerDetails = document.createElement('div');
-		  headerDetails.setAttribute('class','wc-details');
+		  self.el.headerDetails = document.createElement('div');
+		  self.el.headerDetails.setAttribute('class','wc-details');
 		  if(!self.options.bigBanner){
 			  
-		  var prevMonth = document.createElement('i');
-		  prevMonth.setAttribute('class', 'wc-prev fa fa-angle-left');
-		  prevMonth.addEventListener('click', self.prevMonth.bind(this), false);
-		  headerDetails.appendChild(prevMonth);
+		  self.el.headerDetails.prevMonth = document.createElement('i');
+		  self.el.headerDetails.prevMonth.setAttribute('class', 'wc-prev fa fa-angle-left');
+		  self.el.headerDetails.prevMonth.addEventListener('click', self.prevMonth.bind(this), false);
+		  self.el.headerDetails.appendChild(self.el.headerDetails.prevMonth);
 		  
-		  var headerDIV = document.createElement('div');
-		  headerDIV.setAttribute('class','month-year');
-		  headerDIV.textContent = monthName + " " + year;
-		  headerDetails.appendChild(headerDIV);
+		  self.el.headerDetails.headerDIV = document.createElement('div');
+		  self.el.headerDetails.headerDIV.setAttribute('class','month-year');
+		  self.el.headerDetails.headerDIV.textContent = monthName + " " + year;
+		  self.el.headerDetails.appendChild(self.el.headerDetails.headerDIV);
 		  
-		  var nextMonth = document.createElement('i');
-		  nextMonth.setAttribute('class', 'wc-next fa fa-angle-right');
-		  nextMonth.addEventListener('click', self.nextMonth.bind(this), false);
-		  headerDetails.appendChild(nextMonth);
+		  self.el.headerDetails.nextMonth = document.createElement('i');
+		  self.el.headerDetails.nextMonth.setAttribute('class', 'wc-next fa fa-angle-right');
+		  self.el.headerDetails.nextMonth.addEventListener('click', self.nextMonth.bind(this), false);
+		  self.el.headerDetails.appendChild(self.el.headerDetails.nextMonth);
 		  
-		  self.el.appendChild(headerDetails);
+		  self.el.appendChild(self.el.headerDetails);
 		  }
 		  var html = document.createElement("table"); 
 		  html.setAttribute('class','calendar-header');
@@ -258,7 +278,7 @@
 		  }
 		  daysTable.appendChild(dateRow);
 		  self.el.appendChild(daysTable);
-		  document.getElementById(this.options.container).appendChild(self.el);
+		 
 		  
 	}
 	WinkelCalendar.prototype.getHTML = function() {
@@ -287,6 +307,7 @@
 			event.target.classList.add('selected-day');
 			self.updateHeader();
 			if(typeof this.options.onSelect === 'function'){
+				this.setDateVal();
 				this.options.onSelect.call(this, this.date);
 			}
 		}
@@ -298,18 +319,12 @@
 			this.el.bigBanner.monthHeaderName.textContent = cal_months_labels_short[this.date.getMonth()];
 			this.el.bigBanner.dateRow.textContent = this.date.getDate() < 10 ? ("0"+this.date.getDate()) : this.date.getDate();
 			this.el.bigBanner.yearVal.textContent = this.date.getFullYear();
-		/*	this.el.children[0].children[0].innerHTML = "";
-			this.el.children[0].children[1].innerHTML = "";
-			this.el.children[0].children[2].children[0].children[0].innerHTML = "";
-			this.el.children[0].children[2].children[1].innerHTML = "";
-			this.el.children[0].children[0].innerHTML = cal_full_days_lables[this.date.getDay()];
-			this.el.children[0].children[1].innerHTML = this.date.getDate() < 10 ? ("0"+this.date.getDate()) : this.date.getDate();
-			this.el.children[0].children[2].children[0].children[0].innerHTML = cal_months_labels_short[this.date.getMonth()];
-			this.el.children[0].children[2].children[1].innerHTML = this.date.getFullYear();*/
 		}
 		else{
-			this.el.children[0].children[1].innerHTML = "";
-			this.el.children[0].children[1].innerHTML = cal_months_labels[this.date.getMonth()] + " " + this.date.getFullYear();
+			//this.el.children[0].children[1].innerHTML = "";
+			console.log( );
+			this.el.headerDetails.headerDIV.textContent = cal_months_labels[this.date.getMonth()] + " " + this.date.getFullYear();
+			//this.el.children[0].children[1].innerHTML = 
 		}
 
 		
