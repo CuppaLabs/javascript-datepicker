@@ -74,10 +74,18 @@
 	}
 	WinkelCalendar.prototype.init = function(){
 		 this.el.inputContainer = document.createElement('INPUT');
-		 this.el.inputContainer.setAttribute('type','text');
+		 this.el.dateContainer = document.createElement('DIV');
+		 this.el.dateContainer.textContainer = document.createElement('span');
+		 this.el.dateContainer.appendChild(this.el.dateContainer.textContainer);
+		 this.el.dateContainer.calIcon = document.createElement('i');
+		 this.el.dateContainer.calIcon.setAttribute('class','fa fa-calendar');
+		 this.el.dateContainer.appendChild(this.el.dateContainer.calIcon);
+		 this.el.inputContainer.setAttribute('type','hidden');
 		 this.el.inputContainer.setAttribute('class','wc-input');
-		 this.el.inputContainer.addEventListener('click', this.show.bind(this), false);
+		 this.el.dateContainer.setAttribute('class','wc-date-container');
+		 this.el.dateContainer.addEventListener('click', this.show.bind(this), false);
 		 document.getElementById(this.options.container).appendChild(this.el.inputContainer);
+		 document.getElementById(this.options.container).appendChild(this.el.dateContainer);
 		 this.el.style.display = "none";
 		 document.getElementById(this.options.container).appendChild(this.el);
 		 this.setDateVal();
@@ -90,6 +98,7 @@
 			this.el.style.display = "none";
 	}
 	WinkelCalendar.prototype.setDateVal = function(){
+			this.el.dateContainer.textContainer.textContent = moment(this.date).format('DD/MM/YYYY');
 			this.el.inputContainer.value = moment(this.date).format('DD/MM/YYYY');
 	}
 	WinkelCalendar.prototype.createHeaderView = function(){
@@ -256,9 +265,11 @@
 			  dateRow = document.createElement('tr');
 		    for (var j = 0; j <= 6; j++) { 
 		    	var dateCell = document.createElement('td');
+				var span = document.createElement('span');
 		    	dateCell.setAttribute('class','calendar-day');
 		      if (day <= monthLength && (i > 0 || j >= startingDay)) {
-		    	  dateCell.textContent = day;
+		    	  span.textContent = day;
+				  dateCell.appendChild(span);
 			  if(day == parseInt(current_day)){
 				dateCell.classList.add('selected-day');
 			  }
@@ -299,7 +310,7 @@
 	WinkelCalendar.prototype.onCalendarClick = function(){
 		var self = this;
 		var elem = self.el;
-		if(event.target.hasOwnProperty('isDate') && event.target.innerHTML != ""){
+		if(event.target.parentElement.hasOwnProperty('isDate') && event.target.innerHTML != ""){
 
 			var date = event.target.innerHTML;
 			self.date.setDate(parseInt(date));
@@ -307,10 +318,11 @@
 			elem.getElementsByClassName('selected-day')[0].classList.remove('selected-day');
 			event.target.classList.add('selected-day');
 			self.updateHeader();
+			this.setDateVal();
 			if(typeof this.options.onSelect === 'function'){
-				this.setDateVal();
-				this.options.onSelect.call(this, this.date);
+				this.options.onSelect.call(this, this.date);	
 			}
+			this.hide();
 		}
 	}
 	WinkelCalendar.prototype.updateHeader = function(){

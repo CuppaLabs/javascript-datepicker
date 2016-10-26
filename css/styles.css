@@ -9,14 +9,21 @@ body{
     text-align: center;
     margin: 0px auto;
 }
-.wc-input{
+.wc-date-container{
     float: left;
     width: 100%;
     height: 30px;
-    border: 1px solid #CCC;
+    border: 1px solid #FF2D55;
     margin-bottom: 1px;
     font-size: 16px;
     padding: 5px;
+    text-align: left;
+    cursor: pointer;
+}
+.wc-date-container > i{
+    float: right;
+    font-size: 20px;
+    color: #FF2D55;
 }
 .winkel-calendar{
     font-size: 14px;
@@ -119,13 +126,14 @@ body{
 .calendar-days{
 	color: #07c;	
 }
-.today{
-	border: 1px solid #3ce5ed;
+.today > span{
+	border: 1px solid #FF2D55;
     background: none;
     border-radius: 50px;
 }
 .selected-day{
-	background: #3ce5ed;
+	/*background: #3ce5ed;*/
+    background: #FF2D55;
     color: #fff;
     border-radius: 50px;
 }
@@ -133,8 +141,8 @@ body{
 .calendar-days td{
 	cursor: pointer;
 }
-.calendar-days td:hover{
-	background: #3ce5ed;
+.calendar-days td:hover > span{
+	background: #FF2D55;
     color: #fff;
     border-radius: 50px;
 }
@@ -144,8 +152,16 @@ body{
 	font-weight: 300;
 }
 .winkel-calendar table td{
-	padding: 7px 0px;
+	padding: 0px 0px;
+    width: 30px;
 	text-align: center;
-	width: 14.2%;
 	transition: all .1s linear;
+}
+.winkel-calendar table td span{
+    display: block;
+    width: 33px;
+    height: 33px;
+    padding: 8px 5px;
+    margin: 0px;
+    border-radius: 63px;
 }
