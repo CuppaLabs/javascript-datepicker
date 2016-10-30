@@ -19,6 +19,7 @@ body{
     text-align: left;
     cursor: pointer;
     background: #fff;
+    line-height: 20px;
 }
 .wc-date-container > span{
     color: #e40046; 
@@ -45,6 +46,7 @@ body{
     max-width: 250px;
     top: 31px;
     z-index: 9999;
+    overflow: hidden;
 }
 .wc-banner{
     /* background: #3ce5ed; */
@@ -76,6 +78,9 @@ body{
     color: #fff;
     width: 100%;
     float: left;
+}
+.wc-month-row > div{
+    cursor: pointer;
 }
 .wc-year-row{
 	text-align: left;
@@ -196,6 +201,20 @@ body{
 }
 .calendar-header td{
     padding: 4px 0px !important;
+}
+.months-view{
+    background: #fff;
+    height: 200px;
+    position: absolute;
+}
+.months-view > span{
+    display: inline-block;
+    width: 25%;
+    padding: 25px 0px;
+    cursor: pointer;
+}
+.months-view > span:hover{
+    color: #FF2D55;
 }
 .banner-true{
     padding-top: 0px !important;

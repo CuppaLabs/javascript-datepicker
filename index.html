@@ -20,6 +20,7 @@ window.onload = function () {
 	cal = new WinkelCalendar({
 		container: 'cuppaDatePickerBanner',
 		bigBanner: true,
+		defaultDate: '2016-1-12',
 		format : "dd/mm/yyyy",
 		onSelect : onDateChange
 		
@@ -84,6 +85,7 @@ function onDateChange(date){
 			<button class="btn btn-info btn-sm" onClick="cal.show()">Open</button>
 			<button class="btn btn-info btn-sm" onClick="cal.hide()">Close</button>
 			<button class="btn btn-info btn-sm" onClick="cal.today()">Today</button>
+			<button class="btn btn-info btn-sm" onClick="cal.setDate('1990-4-18')">SetDate</button>
 		</div>
 		
     </div>
@@ -93,6 +95,7 @@ function onDateChange(date){
 			<button class="btn btn-info btn-sm" onClick="cal2.show()">Open</button>
 			<button class="btn btn-info btn-sm" onClick="cal2.hide()">Close</button>
 			<button class="btn btn-info btn-sm" onClick="cal2.today()">Today</button>
+			<button class="btn btn-info btn-sm" onClick="cal2.setDate('2017-5-1')">SetDate</button>
 		</div>
     </div>
 

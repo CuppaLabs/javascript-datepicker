@@ -89,11 +89,13 @@
 		 this.el.calendarPopup.style.display = "none";
 		 this.createHeaderView();
 		 this.createDaysView();
+		 this.createMonthView();
 		 this.containerElement.appendChild(this.el);
 		 this.setDateVal();
 		 
 	}
 	WinkelCalendar.prototype.show = function(){
+		this.date = new Date(this.selectedDate);
 		this.updateView();
 		this.el.calendarPopup.style.display = "block";
 	}
@@ -108,7 +110,9 @@
 				this.hide();
 	}
 	WinkelCalendar.prototype.today = function(){
+		    this.date = new Date();
 		    this.selectedDate = new Date();
+			this.setDateVal();
 			this.updateView();
 	}
 	WinkelCalendar.prototype.setDateVal = function(){
@@ -116,17 +120,47 @@
 			this.el.dateContainer.textContainer.textContent = moment(this.selectedDate).format('DD/MM/YYYY');
 			this.el.inputContainer.value = moment(this.selectedDate).format('DD/MM/YYYY');
 	}
-	WinkelCalendar.prototype.setDate = function(){
-			this.el.dateContainer.textContainer.textContent = moment(this.date).format('DD/MM/YYYY');
-			this.el.inputContainer.value = moment(this.date).format('DD/MM/YYYY');
+	WinkelCalendar.prototype.setDate = function(val){
+		    this.date = new Date(val);
+			this.selectedDate = new Date(val);
+			this.setDateVal();
+			this.updateView();
 	}
 	WinkelCalendar.prototype.updateView = function(){
-		    this.date = new Date(this.selectedDate);
-			this.setDateVal();
+		   // this.date = new Date(this.selectedDate);
+			//this.setDateVal();
 			this.updateHeader();
 		    this.destroyDaysTable();
 		    this.createDaysView();
 			
+	}
+	WinkelCalendar.prototype.toggleMonthView = function(e){
+		e.stopPropagation();
+		if(this.el.calendarPopup.monthsView.style.display == "none"){
+			this.el.calendarPopup.monthsView.style.display = "block";
+		}
+		else
+		this.el.calendarPopup.monthsView.style.display = "none";
+	}
+	WinkelCalendar.prototype.createMonthView = function(){
+			this.el.calendarPopup.monthsView = document.createElement('DIV');
+			this.el.calendarPopup.monthsView.setAttribute('class','months-view');
+			this.el.calendarPopup.monthsView.style.display = "none";
+			this.el.calendarPopup.monthsView.addEventListener('click', this.onMonthSelect.bind(this), true);
+			for(var k=0;k<cal_months_labels.length;k++){
+				var tempElem = document.createElement('SPAN');
+					tempElem.textContent = cal_months_labels_short[k];
+					tempElem.setAttribute('value',cal_months_labels_short[k]);
+					this.el.calendarPopup.monthsView.appendChild(tempElem);
+			}
+			this.el.calendarPopup.appendChild(this.el.calendarPopup.monthsView);
+	}
+	WinkelCalendar.prototype.onMonthSelect = function(e){
+			e.stopPropagation();
+			var month = cal_months_labels_short.indexOf(e.target.getAttribute('value'));
+			this.date.setMonth(month);
+			this.updateView();
+			this.el.calendarPopup.monthsView.style.display = "none";
 	}
 	WinkelCalendar.prototype.createHeaderView = function(){
 
@@ -167,6 +201,7 @@
 			  self.el.bigBanner.monthRow.setAttribute('class','wc-month-row');
 			  self.el.bigBanner.monthHeaderName = document.createElement('div');
 			  self.el.bigBanner.monthHeaderName.textContent = cal_months_labels_short[self.date.getMonth()];
+			  self.el.bigBanner.monthHeaderName.addEventListener('click', this.toggleMonthView.bind(this), true);
 			  self.el.bigBanner.monthRow.appendChild(self.el.bigBanner.monthHeaderName);
 			  
 			  self.el.bigBanner.monthControls = document.createElement('div');
@@ -365,10 +400,7 @@
 			this.el.bigBanner.yearVal.textContent = this.date.getFullYear();
 		}
 		else{
-			//this.el.children[0].children[1].innerHTML = "";
-			console.log( );
 			this.el.headerDetails.headerDIV.textContent = cal_months_labels[this.date.getMonth()] + " " + this.date.getFullYear();
-			//this.el.children[0].children[1].innerHTML = 
 		}
 
 		
@@ -429,8 +461,9 @@
 		this.createDaysView();
 	}
 	WinkelCalendar.prototype.destroyDaysTable = function(){
-		this.el.calendarPopup.removeChild(this.el.calendarPopup.children[2]);
+		this.el.calendarPopup.removeChild(this.el.calendarPopup.daysTable);
 	}
+
 	WinkelCalendar.prototype.bodyClick = function(e){
 		if(this.containerElement.contains(e.target)){
 			//this.hide();
