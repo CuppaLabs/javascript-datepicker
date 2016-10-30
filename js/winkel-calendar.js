@@ -44,21 +44,15 @@
         }
         return to;
     };
-    
-
-	var defaults = {
-		defaultDate : new Date(),
-		bigBanner: true,
-		format : "dd/mm/yyyy",
-		onSelect : null
-		
-	}
-
-	
 	function WinkelCalendar(options){
-
+		 this.defaults = {
+				defaultDate : new Date(),
+				bigBanner: true,
+				format : "dd/mm/yyyy",
+				onSelect : null
+			}
 		  if (!this.options) {
-                	this.options = extend({}, defaults, true);
+                	this.options = extend({}, this.defaults, true);
             	  }
 
                   this.options = extend(this.options, options, true);
@@ -66,11 +60,12 @@
 	          var opts = this.options;
 		  
 		  this.date = new Date(opts.defaultDate);
+		  this.selectedDate = new Date(opts.defaultDate);
 		  this.el = document.createElement('div');
-		  this.createHeaderView();
-		  this.createDaysView();
-		  this.attachEvents();
+		  this.containerElement = document.getElementById(this.options.container);
+		  document.addEventListener('click', this.bodyClick.bind(this), true);
 		  this.init();
+
 	}
 	WinkelCalendar.prototype.init = function(){
 		 this.el.inputContainer = document.createElement('INPUT');
@@ -83,23 +78,55 @@
 		 this.el.inputContainer.setAttribute('type','hidden');
 		 this.el.inputContainer.setAttribute('class','wc-input');
 		 this.el.dateContainer.setAttribute('class','wc-date-container');
-		 this.el.dateContainer.addEventListener('click', this.show.bind(this), false);
-		 document.getElementById(this.options.container).appendChild(this.el.inputContainer);
-		 document.getElementById(this.options.container).appendChild(this.el.dateContainer);
-		 this.el.style.display = "none";
-		 document.getElementById(this.options.container).appendChild(this.el);
+		 this.el.dateContainer.addEventListener('click', this.toggle.bind(this), true);
+		 
+		 this.el.calendarPopup = document.createElement('DIV');
+		 this.el.calendarPopup.setAttribute('class','wc-date-popover');
+
+		 this.el.appendChild(this.el.inputContainer);
+		 this.el.appendChild(this.el.dateContainer);
+		 this.el.appendChild(this.el.calendarPopup);
+		 this.el.calendarPopup.style.display = "none";
+		 this.createHeaderView();
+		 this.createDaysView();
+		 this.containerElement.appendChild(this.el);
 		 this.setDateVal();
 		 
 	}
 	WinkelCalendar.prototype.show = function(){
-		this.el.style.display = "block";
+		this.updateView();
+		this.el.calendarPopup.style.display = "block";
 	}
 	WinkelCalendar.prototype.hide = function(){
-			this.el.style.display = "none";
+			this.el.calendarPopup.style.display = "none";
+	}
+	WinkelCalendar.prototype.toggle = function(){
+		    if(this.el.calendarPopup.style.display == "none"){
+				this.show();
+			}
+			else
+				this.hide();
+	}
+	WinkelCalendar.prototype.today = function(){
+		    this.selectedDate = new Date();
+			this.updateView();
 	}
 	WinkelCalendar.prototype.setDateVal = function(){
+		    this.selectedDate = new Date(this.date);
+			this.el.dateContainer.textContainer.textContent = moment(this.selectedDate).format('DD/MM/YYYY');
+			this.el.inputContainer.value = moment(this.selectedDate).format('DD/MM/YYYY');
+	}
+	WinkelCalendar.prototype.setDate = function(){
 			this.el.dateContainer.textContainer.textContent = moment(this.date).format('DD/MM/YYYY');
 			this.el.inputContainer.value = moment(this.date).format('DD/MM/YYYY');
+	}
+	WinkelCalendar.prototype.updateView = function(){
+		    this.date = new Date(this.selectedDate);
+			this.setDateVal();
+			this.updateHeader();
+		    this.destroyDaysTable();
+		    this.createDaysView();
+			
 	}
 	WinkelCalendar.prototype.createHeaderView = function(){
 
@@ -124,12 +151,13 @@
 		  var monthName = cal_months_labels[month];
 		  self.el.setAttribute('class','winkel-calendar');
 		  if(self.options.bigBanner){
+			  this.el.calendarPopup.classList.add('banner-true');
 			  self.el.bigBanner = document.createElement('div');
 			  self.el.bigBanner.setAttribute('class','wc-banner');
 			  self.el.bigBanner.dayRow = document.createElement('div');
 			  self.el.bigBanner.dayRow.setAttribute('class','wc-day-row');
 			  self.el.bigBanner.dayRow.textContent = cal_full_days_lables[self.date.getDay()];
-			  self.el.bigBanner.appendChild(self.el.bigBanner.dayRow);
+			  self.el.bigBanner.appendChild(self.el.bigBanner.dayRow);	
 
 
 			  self.el.bigBanner.monthAndYear = document.createElement('div');
@@ -146,12 +174,12 @@
 			  
 			  self.el.bigBanner.prevMonthIcon = document.createElement('i');
 			  self.el.bigBanner.prevMonthIcon.setAttribute('class', 'fa fa-angle-left');
-			  self.el.bigBanner.prevMonthIcon.addEventListener('click', self.prevMonth.bind(this), false);
+			  self.el.bigBanner.prevMonthIcon.addEventListener('click', self.prevMonth.bind(this), true);
 			  self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.prevMonthIcon);
 			  
 			  self.el.bigBanner.nextMonthIcon = document.createElement('i');
 			  self.el.bigBanner.nextMonthIcon.setAttribute('class', 'fa fa-angle-right');
-			  self.el.bigBanner.nextMonthIcon.addEventListener('click', self.nextMonth.bind(this), false);
+			  self.el.bigBanner.nextMonthIcon.addEventListener('click', self.nextMonth.bind(this), true);
 			  self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.nextMonthIcon);
 			  self.el.bigBanner.monthRow.appendChild(self.el.bigBanner.monthControls);
 			  self.el.bigBanner.dateRow = document.createElement('div');
@@ -172,13 +200,13 @@
 			  self.el.bigBanner.yearControls.setAttribute('class', 'wc-year-controls');
 			  
 			  self.el.bigBanner.prevYearIcon = document.createElement('i');
-			  self.el.bigBanner.prevYearIcon.setAttribute('class', 'fa fa-minus');
-			  self.el.bigBanner.prevYearIcon.addEventListener('click', self.prevYear.bind(this), false);
+			  self.el.bigBanner.prevYearIcon.setAttribute('class', 'fa fa-angle-left');
+			  self.el.bigBanner.prevYearIcon.addEventListener('click', self.prevYear.bind(this), true);
 			  self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.prevYearIcon);
 			  
 			  self.el.bigBanner.nextYearIcon = document.createElement('i');
-			  self.el.bigBanner.nextYearIcon.setAttribute('class', 'fa fa-plus');
-			  self.el.bigBanner.nextYearIcon.addEventListener('click', self.nextYear.bind(this), false);
+			  self.el.bigBanner.nextYearIcon.setAttribute('class', 'fa fa-angle-right');
+			  self.el.bigBanner.nextYearIcon.addEventListener('click', self.nextYear.bind(this), true);
 			  self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.nextYearIcon);
 			  self.el.bigBanner.yearRow.appendChild(self.el.bigBanner.yearControls);
 			  
@@ -189,7 +217,7 @@
 			  self.el.bigBanner.monthAndYear.appendChild(self.el.bigBanner.yearRow);
 			  
 			  self.el.bigBanner.appendChild(self.el.bigBanner.monthAndYear);
-			  self.el.appendChild(self.el.bigBanner);
+			  self.el.calendarPopup.appendChild(self.el.bigBanner);
 			  console.log(self);
 		  }
 		  self.el.headerDetails = document.createElement('div');
@@ -198,7 +226,7 @@
 			  
 		  self.el.headerDetails.prevMonth = document.createElement('i');
 		  self.el.headerDetails.prevMonth.setAttribute('class', 'wc-prev fa fa-angle-left');
-		  self.el.headerDetails.prevMonth.addEventListener('click', self.prevMonth.bind(this), false);
+		  self.el.headerDetails.prevMonth.addEventListener('click', self.prevMonth.bind(this), true);
 		  self.el.headerDetails.appendChild(self.el.headerDetails.prevMonth);
 		  
 		  self.el.headerDetails.headerDIV = document.createElement('div');
@@ -208,10 +236,10 @@
 		  
 		  self.el.headerDetails.nextMonth = document.createElement('i');
 		  self.el.headerDetails.nextMonth.setAttribute('class', 'wc-next fa fa-angle-right');
-		  self.el.headerDetails.nextMonth.addEventListener('click', self.nextMonth.bind(this), false);
+		  self.el.headerDetails.nextMonth.addEventListener('click', self.nextMonth.bind(this), true);
 		  self.el.headerDetails.appendChild(self.el.headerDetails.nextMonth);
 		  
-		  self.el.appendChild(self.el.headerDetails);
+		  self.el.calendarPopup.appendChild(self.el.headerDetails);
 		  }
 		  var html = document.createElement("table"); 
 		  html.setAttribute('class','calendar-header');
@@ -224,7 +252,7 @@
 			  daysRow.appendChild(daysTd);
 		  }
 		  html.appendChild(daysRow);
-		  self.el.appendChild(html);
+		  self.el.calendarPopup.appendChild(html);
 
 	}
 	WinkelCalendar.prototype.getMonthLength = function(month, year){
@@ -288,9 +316,11 @@
 		    	daysTable.appendChild(dateRow);
 		    }
 		  }
-		  daysTable.appendChild(dateRow);
-		  self.el.appendChild(daysTable);
-		 
+		  self.el.calendarPopup.daysTable = daysTable
+		  self.el.calendarPopup.daysTable .appendChild(dateRow);
+		  self.el.calendarPopup.daysTable.addEventListener('click', self.onCalendarClick.bind(this), true);
+		  self.el.calendarPopup.appendChild(self.el.calendarPopup.daysTable);
+		  
 		  
 	}
 	WinkelCalendar.prototype.getHTML = function() {
@@ -302,12 +332,13 @@
 	}
 	WinkelCalendar.prototype.attachEvents = function(){
 		var self = this;
-		var elem = self.el;
-		elem.addEventListener('click', self.onCalendarClick.bind(this), false);
+		var elem = self.el.calendarPopup.daysTable;
+		elem.addEventListener('click', self.onCalendarClick.bind(this), true);
 
 	}
 
-	WinkelCalendar.prototype.onCalendarClick = function(){
+	WinkelCalendar.prototype.onCalendarClick = function(e){
+		e.stopPropagation();
 		var self = this;
 		var elem = self.el;
 		if(event.target.parentElement.hasOwnProperty('isDate') && event.target.innerHTML != ""){
@@ -327,7 +358,7 @@
 	}
 	WinkelCalendar.prototype.updateHeader = function(){
 		if(this.options.bigBanner){
-			console.log();
+			console.log(this.date);
 			this.el.bigBanner.dayRow.textContent = cal_full_days_lables[this.date.getDay()];
 			this.el.bigBanner.monthHeaderName.textContent = cal_months_labels_short[this.date.getMonth()];
 			this.el.bigBanner.dateRow.textContent = this.date.getDate() < 10 ? ("0"+this.date.getDate()) : this.date.getDate();
@@ -342,7 +373,8 @@
 
 		
 	}
-	WinkelCalendar.prototype.prevMonth = function(){
+	WinkelCalendar.prototype.prevMonth = function(e){
+		e.stopPropagation();
 		var self = this;
 		if(self.date.getMonth() == 0){
 			self.date.setMonth(11);
@@ -361,7 +393,8 @@
 		self.destroyDaysTable();
 		self.createDaysView();
 	}
-	WinkelCalendar.prototype.nextMonth = function(){
+	WinkelCalendar.prototype.nextMonth = function(e){
+		e.stopPropagation();
 		var self = this;
 		if(self.date.getMonth() == 11){
 			self.date.setMonth(0);
@@ -381,20 +414,32 @@
 		self.destroyDaysTable();
 		self.createDaysView();
 	}
-	WinkelCalendar.prototype.prevYear = function(){
+	WinkelCalendar.prototype.prevYear = function(e){
+		e.stopPropagation();
 		this.date.setFullYear(this.date.getFullYear() - 1);
 		this.updateHeader();
 		this.destroyDaysTable();
 		this.createDaysView();
 	}
-	WinkelCalendar.prototype.nextYear = function(){
+	WinkelCalendar.prototype.nextYear = function(e){
+		e.stopPropagation();
 		this.date.setFullYear(this.date.getFullYear() + 1);
 		this.updateHeader();
 		this.destroyDaysTable();
 		this.createDaysView();
 	}
 	WinkelCalendar.prototype.destroyDaysTable = function(){
-		this.el.removeChild(this.el.children[2]);
+		this.el.calendarPopup.removeChild(this.el.calendarPopup.children[2]);
+	}
+	WinkelCalendar.prototype.bodyClick = function(e){
+		if(this.containerElement.contains(e.target)){
+			//this.hide();
+		}
+		else{
+			this.hide();
+		}
+		//alert();
+		//this.hide();
 	}
 	window.WinkelCalendar = WinkelCalendar || {};
 	

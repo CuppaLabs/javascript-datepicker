@@ -4,10 +4,9 @@ body{
 *{
 	box-sizing: border-box;
 }
-#container, #container2{
+#cuppaDatePickerBanner, #cuppaDatePicker{
 	width: 250px;
     text-align: center;
-    margin: 0px auto;
 }
 .wc-date-container{
     float: left;
@@ -19,6 +18,10 @@ body{
     padding: 5px;
     text-align: left;
     cursor: pointer;
+    background: #fff;
+}
+.wc-date-container > span{
+    color: #e40046; 
 }
 .wc-date-container > i{
     float: right;
@@ -26,21 +29,33 @@ body{
     color: #FF2D55;
 }
 .winkel-calendar{
+    position: relative;
+}
+.wc-date-popover{
     font-size: 14px;
     box-shadow: 0px 7px 23px 0px #e7e7e7;
     margin: 0px auto;
     perspective: 1000px;
     float: left;
+    background: #fff;
+    padding: 5px 0px;
+    border: 1px solid #FF2D55;
+    min-width: 250px;
+    position: absolute;
+    max-width: 250px;
+    top: 31px;
+    z-index: 9999;
 }
 .wc-banner{
     /* background: #3ce5ed; */
     background: #FF2D55;
     float: left;
     width: 100%;
+    margin-bottom: 5px;
 }
 .wc-day-row{
     padding: 5px 0px;
-    background: rgba(0, 0, 0, 0.07);
+    background: #e40046;
     color: #fff;
     width: 100%;
     float: left;
@@ -49,14 +64,14 @@ body{
     display: inline-block;
     font-size: 62px;
     color: #fff;
-    padding: 15px 5px;
+    padding: 0px 5px;
     width: 50%;
     float: left;
     text-align: right;
     font-weight: 200;    
 }
 .wc-month-row{
-	padding: 0px 0px 8px 0px;
+	padding: 17px 0px 0px 0px;
     font-size: 21px;
     color: #fff;
     width: 100%;
@@ -71,7 +86,7 @@ body{
 }
 .wc-my-sec{
 	display: inline-block;
-	padding: 25px 5px;
+	padding: 0px 5px;
 	float: left;
     width: 50%;
     font-weight: 300;
@@ -81,61 +96,74 @@ body{
     text-align: left;
 }
 
-.wc-month-controls > .fa{
-	cursor: pointer;
-	padding: 0px 2px;
-}
-.wc-month-controls > .fa:hover{
+
+.wc-month-controls > .fa:hover, .wc-year-controls > .fa:hover{
 	color: #fff;
 }
+.wc-details > .fa:hover{
+    color: #ccc;
+}
 .wc-month-controls{
-    padding: 9px 5px 0px 5px;
+    padding: 5px;
     font-size: 16px;
     color: rgba(255, 255, 255, 0.71);
     float: right;
 }
 .wc-year-controls{
-	padding: 4px 5px 0px 5px;
-    font-size: 10px;
+	padding: 2px 5px 0px 5px;
+    font-size: 16px;
     color: rgba(255, 255, 255, 0.71);
     float: right;
 }
-.wc-year-controls > i:nth-child(1){
-	margin-right: 4px;
+.wc-year-controls > .fa , .wc-month-controls > .fa{
+    cursor: pointer;
+    padding: 0px 4px;
 }
 
 .wc-details{
     float: left;
-    width: 100%;	
-}
-.wc-prev, .wc-next{
-	
+    width: 100%;
+    padding: 5px 0px 10px;	
 }
 .wc-prev{
 	float: left;
 	width:25%;
+    text-align: left;
+    padding: 0px 15px;
+    cursor: pointer;
+    font-size: 17px;
 }
 .month-year{
 	float: left;
 	width:50%;
+    color: #e40046;
 }
 .wc-next{
 	float: right;
 	width:25%;
+    text-align: right;
+    padding: 0px 15px;
+    cursor: pointer;
+    font-size: 17px;
 }
 .calendar-days{
-	color: #07c;	
+	color: #07c;
+    height: 200px;	
 }
 .today > span{
 	border: 1px solid #FF2D55;
     background: none;
     border-radius: 50px;
 }
-.selected-day{
+.selected-day > span{
 	/*background: #3ce5ed;*/
     background: #FF2D55;
     color: #fff;
     border-radius: 50px;
+}
+.calendar-header{
+    background: #FF2D55;
+    color: #fff;
 }
 
 .calendar-days td{
@@ -150,10 +178,11 @@ body{
 	width: 100%;
 	text-align: center;
 	font-weight: 300;
+    border-collapse: collapse;
 }
 .winkel-calendar table td{
 	padding: 0px 0px;
-    width: 30px;
+    width: calc((100%)/7);
 	text-align: center;
 	transition: all .1s linear;
 }
@@ -161,7 +190,21 @@ body{
     display: block;
     width: 33px;
     height: 33px;
-    padding: 8px 5px;
+    padding: 6px 9px;
     margin: 0px;
     border-radius: 63px;
+}
+.calendar-header td{
+    padding: 4px 0px !important;
+}
+.banner-true{
+    padding-top: 0px !important;
+    border: none !important;
+}
+.banner-true > .wc-banner{
+    margin-bottom : 0px !important;
+}
+.methods{
+    clear: left;
+    padding: 50px 0px;
 }
