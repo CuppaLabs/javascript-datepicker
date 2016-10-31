@@ -142,6 +142,10 @@
 		else
 		this.el.calendarPopup.monthsView.style.display = "none";
 	}
+	WinkelCalendar.prototype.toggleYearView = function(e){
+		e.stopPropagation();
+		alert();
+	}
 	WinkelCalendar.prototype.createMonthView = function(){
 			this.el.calendarPopup.monthsView = document.createElement('DIV');
 			this.el.calendarPopup.monthsView.setAttribute('class','months-view');
@@ -154,6 +158,19 @@
 					this.el.calendarPopup.monthsView.appendChild(tempElem);
 			}
 			this.el.calendarPopup.appendChild(this.el.calendarPopup.monthsView);
+	}
+	WinkelCalendar.prototype.createYearView = function(){
+		this.el.calendarPopup.yearsView = document.createElement('DIV');
+			this.el.calendarPopup.yearsView.setAttribute('class','years-view');
+			this.el.calendarPopup.yearsView.style.display = "none";
+			this.el.calendarPopup.yearsView.addEventListener('click', this.onYearSelect.bind(this), true);
+			for(var k=0;k<cal_months_labels.length;k++){
+				var tempElem = document.createElement('SPAN');
+					tempElem.textContent = cal_months_labels_short[k];
+					tempElem.setAttribute('value',cal_months_labels_short[k]);
+					this.el.calendarPopup.monthsView.appendChild(tempElem);
+			}
+			this.el.calendarPopup.appendChild(this.el.calendarPopup.yearsView);
 	}
 	WinkelCalendar.prototype.onMonthSelect = function(e){
 			e.stopPropagation();
@@ -210,13 +227,13 @@
 			  self.el.bigBanner.prevMonthIcon = document.createElement('i');
 			  self.el.bigBanner.prevMonthIcon.setAttribute('class', 'fa fa-angle-left');
 			  self.el.bigBanner.prevMonthIcon.addEventListener('click', self.prevMonth.bind(this), true);
-			  self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.prevMonthIcon);
+			  //self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.prevMonthIcon);
 			  
 			  self.el.bigBanner.nextMonthIcon = document.createElement('i');
 			  self.el.bigBanner.nextMonthIcon.setAttribute('class', 'fa fa-angle-right');
 			  self.el.bigBanner.nextMonthIcon.addEventListener('click', self.nextMonth.bind(this), true);
-			  self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.nextMonthIcon);
-			  self.el.bigBanner.monthRow.appendChild(self.el.bigBanner.monthControls);
+			 // self.el.bigBanner.monthControls.appendChild(self.el.bigBanner.nextMonthIcon);
+			 // self.el.bigBanner.monthRow.appendChild(self.el.bigBanner.monthControls);
 			  self.el.bigBanner.dateRow = document.createElement('div');
 			  self.el.bigBanner.dateRow.setAttribute('class','wc-date-row');
 			  if(self.date.getDate() < 10){
@@ -229,6 +246,7 @@
 			  self.el.bigBanner.yearRow.setAttribute('class','wc-year-row');
 			  self.el.bigBanner.yearVal = document.createElement('div');
 			  self.el.bigBanner.yearVal.textContent = self.date.getFullYear();
+			  self.el.bigBanner.yearVal.addEventListener('click', this.toggleYearView.bind(this), true);
 			  self.el.bigBanner.yearRow.appendChild(self.el.bigBanner.yearVal);
 			  
 			  self.el.bigBanner.yearControls = document.createElement('div');
@@ -237,13 +255,13 @@
 			  self.el.bigBanner.prevYearIcon = document.createElement('i');
 			  self.el.bigBanner.prevYearIcon.setAttribute('class', 'fa fa-angle-left');
 			  self.el.bigBanner.prevYearIcon.addEventListener('click', self.prevYear.bind(this), true);
-			  self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.prevYearIcon);
+			  //self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.prevYearIcon);
 			  
 			  self.el.bigBanner.nextYearIcon = document.createElement('i');
 			  self.el.bigBanner.nextYearIcon.setAttribute('class', 'fa fa-angle-right');
 			  self.el.bigBanner.nextYearIcon.addEventListener('click', self.nextYear.bind(this), true);
-			  self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.nextYearIcon);
-			  self.el.bigBanner.yearRow.appendChild(self.el.bigBanner.yearControls);
+			  //self.el.bigBanner.yearControls.appendChild(self.el.bigBanner.nextYearIcon);
+			  //self.el.bigBanner.yearRow.appendChild(self.el.bigBanner.yearControls);
 			  
 			  
 			  self.el.bigBanner.appendChild(self.el.bigBanner.dateRow);
@@ -257,7 +275,7 @@
 		  }
 		  self.el.headerDetails = document.createElement('div');
 		  self.el.headerDetails.setAttribute('class','wc-details');
-		  if(!self.options.bigBanner){
+		 // if(self.options.bigBanner){
 			  
 		  self.el.headerDetails.prevMonth = document.createElement('i');
 		  self.el.headerDetails.prevMonth.setAttribute('class', 'wc-prev fa fa-angle-left');
@@ -275,7 +293,7 @@
 		  self.el.headerDetails.appendChild(self.el.headerDetails.nextMonth);
 		  
 		  self.el.calendarPopup.appendChild(self.el.headerDetails);
-		  }
+		//  }
 		  var html = document.createElement("table"); 
 		  html.setAttribute('class','calendar-header');
 		 
@@ -398,6 +416,7 @@
 			this.el.bigBanner.monthHeaderName.textContent = cal_months_labels_short[this.date.getMonth()];
 			this.el.bigBanner.dateRow.textContent = this.date.getDate() < 10 ? ("0"+this.date.getDate()) : this.date.getDate();
 			this.el.bigBanner.yearVal.textContent = this.date.getFullYear();
+			this.el.headerDetails.headerDIV.textContent = cal_months_labels[this.date.getMonth()] + " " + this.date.getFullYear();
 		}
 		else{
 			this.el.headerDetails.headerDIV.textContent = cal_months_labels[this.date.getMonth()] + " " + this.date.getFullYear();

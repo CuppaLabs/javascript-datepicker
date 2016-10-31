@@ -1,11 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
+ <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="theme-color" content="#ffcd00" />
-<title>Insert title here</title>
+	<meta name="mobile-web-app-capable" content="yes">
+	<title>Insert title here</title>
 <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
@@ -31,7 +31,7 @@ window.onload = function () {
 		format : "dd/mm/yyyy",
 		onSelect : onDateChange
 		
-	});			
+	});	
 }
 function onDateChange(date){
 	//document.getElementById('container2').innerHTML = date;
@@ -40,9 +40,6 @@ function onDateChange(date){
 </script>
 </head>
 <body>
-
-
-
 <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
         <div class="navbar-header">
@@ -60,13 +57,12 @@ function onDateChange(date){
             <li><a href="#">Fiddle</a></li>
             <li><a href="#">Back to Tutorial</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
+        </div>
       </div>
-    </nav>
+    </nav> 
 
-<div class="container col-md-6">
+<div class="container col-sm-12 col-md-12 col-lg-6">
 
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1 class="component-title">Cuppa DatePicker<span><br>with JavaScript</span></h1>
         <p>Cool JavaScript DatePicker for Web and Mobile</p>
@@ -79,7 +75,7 @@ function onDateChange(date){
       </div>
 
     </div>
-	    <div class="container datepicker-container col-md-3">
+	    <div class="container datepicker-container col-sm-6 col-md-6 col-lg-3">
 		<div id="cuppaDatePickerBanner"></div>
 		<div class="methods">
 			<button class="btn btn-info btn-sm" onClick="cal.show()">Open</button>
@@ -89,7 +85,7 @@ function onDateChange(date){
 		</div>
 		
     </div>
-	<div class="container datepicker-container col-md-3">
+	<div class="container datepicker-container col-sm-6 col-md-6 col-lg-3">
 		<div id="cuppaDatePicker"></div>
 		<div class="methods">
 			<button class="btn btn-info btn-sm" onClick="cal2.show()">Open</button>

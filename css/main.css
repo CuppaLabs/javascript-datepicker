@@ -21,6 +21,8 @@ body{
 .jumbotron{
   background: transparent;
   text-align: center;
+  margin-bottom: 0px;
+  padding-top: 10px;
 }
 .jumbotron > p{
   font-size: 18px;
@@ -28,7 +30,6 @@ body{
   color: #656565;
 }
 .component-title{
-  font-size: 50px !important;
   font-weight: 300;
 
 }
@@ -53,7 +54,19 @@ iframe{
 }
 .nav-pills > li > a{
   font-weight: 300;
+  padding: 10px 10px;
 }
 .datepicker-container{
-  padding: 80px 15px;
+  padding: 0px 15px;
+}
+@media (min-width: 768px){
+    .component-title{
+      font-size: 50px !important; 
+    }
+    .nav-pills > li > a{
+      padding: 10px 15px;
+    }
+    .datepicker-container {
+        padding: 80px 15px;
+    }
 }

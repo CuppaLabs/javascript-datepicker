@@ -1,0 +1,10 @@
+{
+  "name": "Cuppa-DatePicker",
+  "version": "1.0.0",
+  "scripts":{
+      "start":"node app.js"
+  },
+  "dependencies": {
+    "express": "^4.11.0"
+  }
+}
