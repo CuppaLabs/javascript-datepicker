@@ -212,20 +212,51 @@ body{
 .calendar-header td{
     padding: 15px 0px !important;
 }
-.months-view{
+.months-view, .years-view{
     background: #fff;
-    height: 250px;
     position: absolute;
-    bottom: 0;
     width: 100%;
+    top: 210px;
+    width: 100%;
+    height: calc(100% - 210px);
+    bottom: 0;
+    
 }
-.months-view > span{
+.years-list-view{
+   float: left;
+   width: calc(100% - 60px);
+   height: 100%;
+}
+.months-view > span, .years-list-view > span{
     display: inline-block;
     width: 25%;
     padding: 25px 0px;
     cursor: pointer;
+    font-size: 16px;
 }
-.months-view > span:hover{
+.years-list-view > span{
+    width: 33.3333%
+}
+.years-view > .prev, .years-view > .next{
+    float: left;
+    width: 30px;
+    padding: 85px 0px;
+    cursor: pointer;
+    font-size: 52px;
+}
+.years-view > .prev:hover, .years-view > .next:hover{
+    color: #ccc;
+}
+.years-view > .next{
+    float: right;
+}
+.current-month, .current-year{
+    color: #FF2D55;
+}
+.years-view > span{
+    width: 33.3333%;
+}
+.months-view > span:hover, .years-list-view > span:hover{
     color: #FF2D55;
 }
 .banner-true{
@@ -291,5 +322,10 @@ body{
         line-height: 24px;
         width: 35px;
         height: 35px;
+    }
+    .months-view, .years-view{
+        top: 134px;
+        width: 100%;
+        height: calc(100% - 134px);
     }
 }

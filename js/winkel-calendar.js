@@ -90,6 +90,7 @@
 		 this.createHeaderView();
 		 this.createDaysView();
 		 this.createMonthView();
+		 this.createYearView();
 		 this.containerElement.appendChild(this.el);
 		 this.setDateVal();
 		 
@@ -127,24 +128,29 @@
 			this.updateView();
 	}
 	WinkelCalendar.prototype.updateView = function(){
-		   // this.date = new Date(this.selectedDate);
-			//this.setDateVal();
 			this.updateHeader();
 		    this.destroyDaysTable();
-		    this.createDaysView();
-			
+		    this.createDaysView();		
 	}
 	WinkelCalendar.prototype.toggleMonthView = function(e){
 		e.stopPropagation();
+		this.updateMonthView();
 		if(this.el.calendarPopup.monthsView.style.display == "none"){
 			this.el.calendarPopup.monthsView.style.display = "block";
 		}
 		else
 		this.el.calendarPopup.monthsView.style.display = "none";
+		this.el.calendarPopup.yearsView.style.display = "none";
 	}
 	WinkelCalendar.prototype.toggleYearView = function(e){
 		e.stopPropagation();
-		alert();
+		this.updateYearView();
+		if(this.el.calendarPopup.yearsView.style.display == "none"){
+			this.el.calendarPopup.yearsView.style.display = "block";
+		}
+		else
+		this.el.calendarPopup.yearsView.style.display = "none";
+		this.el.calendarPopup.monthsView.style.display = "none";
 	}
 	WinkelCalendar.prototype.createMonthView = function(){
 			this.el.calendarPopup.monthsView = document.createElement('DIV');
@@ -159,25 +165,110 @@
 			}
 			this.el.calendarPopup.appendChild(this.el.calendarPopup.monthsView);
 	}
-	WinkelCalendar.prototype.createYearView = function(){
-		this.el.calendarPopup.yearsView = document.createElement('DIV');
+	WinkelCalendar.prototype.createYearView = function(direction){			
+		    this.el.calendarPopup.yearsView = document.createElement('DIV');
 			this.el.calendarPopup.yearsView.setAttribute('class','years-view');
 			this.el.calendarPopup.yearsView.style.display = "none";
-			this.el.calendarPopup.yearsView.addEventListener('click', this.onYearSelect.bind(this), true);
-			for(var k=0;k<cal_months_labels.length;k++){
+			this.el.calendarPopup.yearsView.yearListView = document.createElement('DIV');
+			this.el.calendarPopup.yearsView.prevYearList = document.createElement('DIV');
+			this.el.calendarPopup.yearsView.prevYearList.setAttribute('class','prev');
+			this.el.calendarPopup.yearsView.prevYearList.setAttribute('class','fa');
+			this.el.calendarPopup.yearsView.prevYearList.classList.add('fa-angle-left');
+			this.el.calendarPopup.yearsView.prevYearList.classList.add('prev');
+			//this.el.calendarPopup.yearsView.prevYearList.textContent = "Prev";
+			this.el.calendarPopup.yearsView.nextYearList = document.createElement('DIV');
+			this.el.calendarPopup.yearsView.nextYearList.setAttribute('class','fa');
+			this.el.calendarPopup.yearsView.nextYearList.classList.add('fa-angle-right');
+			this.el.calendarPopup.yearsView.nextYearList.classList.add('next');
+			//this.el.calendarPopup.yearsView.nextYearList.textContent = "Next";
+			this.el.calendarPopup.yearsView.prevYearList.addEventListener('click', this.setPrevYearList.bind(this), true);
+			this.el.calendarPopup.yearsView.nextYearList.addEventListener('click', this.setNextYearList.bind(this), true);
+
+			this.el.calendarPopup.yearsView.yearListView.setAttribute('class','years-list-view');
+			this.el.calendarPopup.yearsView.yearListView.addEventListener('click', this.onYearSelect.bind(this), true);
+			var currentYear = this.date.getFullYear();
+			var startYear = currentYear - 4;
+			this.el.calendarPopup.yearsView.yearsList = [];
+			for(var k=0; k< 9; k++){
 				var tempElem = document.createElement('SPAN');
-					tempElem.textContent = cal_months_labels_short[k];
-					tempElem.setAttribute('value',cal_months_labels_short[k]);
-					this.el.calendarPopup.monthsView.appendChild(tempElem);
+					tempElem.textContent = startYear + k;
+					tempElem.setAttribute('value',startYear + k);
+					this.el.calendarPopup.yearsView.yearsList.push(tempElem);
+					this.el.calendarPopup.yearsView.yearListView.appendChild(this.el.calendarPopup.yearsView.yearsList[k]);
 			}
+			this.el.calendarPopup.yearsView.appendChild(this.el.calendarPopup.yearsView.prevYearList);
+			this.el.calendarPopup.yearsView.appendChild(this.el.calendarPopup.yearsView.nextYearList);
+			this.el.calendarPopup.yearsView.appendChild(this.el.calendarPopup.yearsView.yearListView);
 			this.el.calendarPopup.appendChild(this.el.calendarPopup.yearsView);
 	}
 	WinkelCalendar.prototype.onMonthSelect = function(e){
 			e.stopPropagation();
 			var month = cal_months_labels_short.indexOf(e.target.getAttribute('value'));
 			this.date.setMonth(month);
+			this.updateMonthView();
 			this.updateView();
 			this.el.calendarPopup.monthsView.style.display = "none";
+	}
+	WinkelCalendar.prototype.onYearSelect = function(e){
+			e.stopPropagation();
+			var year = e.target.getAttribute('value');
+			this.date.setFullYear(parseInt(year));
+			this.updateView();
+			this.el.calendarPopup.yearsView.style.display = "none";
+	}
+	WinkelCalendar.prototype.setPrevYearList = function(){
+		var startYear = parseInt(this.el.calendarPopup.yearsView.yearsList[0].textContent - 9);
+		var currentYear = this.date.getFullYear();
+		for(var k=0; k< 9; k++){
+			if((startYear + k) === currentYear ){
+					this.el.calendarPopup.yearsView.yearsList[k].setAttribute('class','current-year');
+				}
+				else{
+					this.el.calendarPopup.yearsView.yearsList[k].classList.remove('current-year');
+				}
+			this.el.calendarPopup.yearsView.yearsList[k].setAttribute('value',startYear + k);
+			this.el.calendarPopup.yearsView.yearsList[k].textContent = startYear + k;	
+		}
+			
+
+	}
+	WinkelCalendar.prototype.setNextYearList = function(){
+		var startYear = parseInt(this.el.calendarPopup.yearsView.yearsList[8].textContent) + 1;
+		var currentYear = this.date.getFullYear();
+		for(var k=0; k< 9; k++){
+			if((startYear + k) === currentYear ){
+					this.el.calendarPopup.yearsView.yearsList[k].setAttribute('class','current-year');
+				}
+				else{
+					this.el.calendarPopup.yearsView.yearsList[k].classList.remove('current-year');
+				}
+			this.el.calendarPopup.yearsView.yearsList[k].setAttribute('value',startYear + k);
+			this.el.calendarPopup.yearsView.yearsList[k].textContent = startYear + k;	
+		}
+	}
+	WinkelCalendar.prototype.updateMonthView = function(){
+		var months = this.el.calendarPopup.monthsView.children;
+		for(var t=0;t< months.length;t++){
+			if(months[t].textContent === cal_months_labels_short[this.date.getMonth()]){
+				months[t].setAttribute('class','current-month');
+			}
+			else
+			months[t].classList.remove('current-month');
+		}
+	}
+	WinkelCalendar.prototype.updateYearView = function(){
+		var currentYear = this.date.getFullYear();
+			var startYear = currentYear - 4;
+			for(var k=0; k< 9; k++){
+				if((startYear + k) === currentYear ){
+					this.el.calendarPopup.yearsView.yearsList[k].setAttribute('class','current-year');
+				}
+				else{
+					this.el.calendarPopup.yearsView.yearsList[k].classList.remove('current-year');
+				}
+				this.el.calendarPopup.yearsView.yearsList[k].setAttribute('value',startYear + k);
+				this.el.calendarPopup.yearsView.yearsList[k].textContent = startYear + k;	
+			}
 	}
 	WinkelCalendar.prototype.createHeaderView = function(){
 
@@ -411,7 +502,6 @@
 	}
 	WinkelCalendar.prototype.updateHeader = function(){
 		if(this.options.bigBanner){
-			console.log(this.date);
 			this.el.bigBanner.dayRow.textContent = cal_full_days_lables[this.date.getDay()];
 			this.el.bigBanner.monthHeaderName.textContent = cal_months_labels_short[this.date.getMonth()];
 			this.el.bigBanner.dateRow.textContent = this.date.getDate() < 10 ? ("0"+this.date.getDate()) : this.date.getDate();
@@ -460,7 +550,6 @@
 			
 		}
 		
-		console.log(this.date);
 		self.updateHeader();
 		self.destroyDaysTable();
 		self.createDaysView();
