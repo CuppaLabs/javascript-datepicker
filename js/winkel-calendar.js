@@ -211,10 +211,12 @@
 	}
 	WinkelCalendar.prototype.onYearSelect = function(e){
 			e.stopPropagation();
-			var year = e.target.getAttribute('value');
-			this.date.setFullYear(parseInt(year));
-			this.updateView();
-			this.el.calendarPopup.yearsView.style.display = "none";
+			if(e.target.getAttribute('value')){
+				var year = e.target.getAttribute('value');
+				this.date.setFullYear(parseInt(year));
+				this.updateView();
+				this.el.calendarPopup.yearsView.style.display = "none";
+			}
 	}
 	WinkelCalendar.prototype.setPrevYearList = function(){
 		var startYear = parseInt(this.el.calendarPopup.yearsView.yearsList[0].textContent - 9);
