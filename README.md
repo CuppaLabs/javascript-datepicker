@@ -5,6 +5,8 @@ Cool Responsive Javascript Datepicker for Web and Mobile.
 
 View the [Demo here](https://cuppalabs.github.io/javascript-datepicker/) of Date Picker.
 
+![www.cuppalabs.com](https://raw.githubusercontent.com/CuppaLabs/javascript-datepicker/master/images/datepicker-banner.png)
+
 ## Getting Started
 
 #### 1. Add Datepicker Library
