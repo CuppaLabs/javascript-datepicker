@@ -11,24 +11,24 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
 <link href="css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css">
-<link href="css/styles.css" rel="stylesheet">
+<link href="css/cuppa-datepicker-styles.css" rel="stylesheet">
 <script type="text/javascript" src="js/lib/moment.js"></script>
-<script type="text/javascript" src="js/winkel-calendar.js"></script>
+<script type="text/javascript" src="js/cuppa-calendar.js"></script>
 <script>
 var cal = null;
 window.onload = function () { 
 	cal = new WinkelCalendar({
-		container: 'cuppaDatePickerBanner',
+		container: 'cuppaDatePickerContainer',
 		bigBanner: true,
 		defaultDate: '2016-1-12',
-		format : "dd/mm/yyyy",
+		format : "DD-MM-YYYY",
 		onSelect : onDateChange
 		
 	});	
 		cal2 = new WinkelCalendar({
 		container: 'cuppaDatePicker',
 		bigBanner: false,
-		format : "dd/mm/yyyy",
+		format : "DD/MM/YYYY",
 		onSelect : onDateChange
 		
 	});	
@@ -49,12 +49,10 @@ function onDateChange(date){
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Cuppa Labs</a>
+          <a class="navbar-brand" href="http://www.cuppalabs.com">Cuppa Labs</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav nav-pills pull-right">
-            <li><a href="#">Download</a></li>
-            <li><a href="#">Fiddle</a></li>
             <li><a href="#">Back to Tutorial</a></li>
           </ul>
         </div>
@@ -66,17 +64,17 @@ function onDateChange(date){
       <div class="jumbotron">
         <h1 class="component-title">Cuppa DatePicker<span><br>with JavaScript</span></h1>
         <p>Cool JavaScript DatePicker for Web and Mobile</p>
-           <ul class="nav nav-pills">
-            <li class="active"><a href="index.html">Demo 1</a></li>
-            <li><a href="index2.html">Demo 2</a></li>
-            <li><a href="index3.html">Demo 3</a></li>
-            <li><a href="index4.html">Demo 4</a></li>
-          </ul>
+          <p class="bt-group">
+            <a href="https://github.com/CuppaLabs/javascript-datepicker/archive/master.zip" type="button" class="btn btn-success"><i class="fa fa-download" aria-hidden="true"></i><span class="hidden-xs"> Download </span></a>
+            <a href="https://jsfiddle.net/solomon301/s3hL05s6/" target='_blank' type="button" class="btn btn-success"><i class="fa fa-jsfiddle" aria-hidden="true"></i><span class="hidden-xs">  Fiddle</span></a>
+            <a href="https://github.com/CuppaLabs/javascript-datepicker" target='_blank' type="button" class="btn btn-success"><i class="fa fa-github" aria-hidden="true"></i><span class="hidden-xs">  Github</span></a>
+            <a href="https://github.com/CuppaLabs/javascript-datepicker#documentation" target='_blank' type="button" class="btn btn-success"><i class="fa fa-book" aria-hidden="true"></i><span class="hidden-xs">  Documentation</span></a>
+          </p>
       </div>
 
     </div>
 	    <div class="container datepicker-container col-sm-6 col-md-6 col-lg-3">
-		<div id="cuppaDatePickerBanner"></div>
+		<div id="cuppaDatePickerContainer"></div>
 		<div class="methods">
 			<button class="btn btn-info btn-sm" onClick="cal.show()">Open</button>
 			<button class="btn btn-info btn-sm" onClick="cal.hide()">Close</button>

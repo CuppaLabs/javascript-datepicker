@@ -4,7 +4,7 @@ body{
 *{
 	box-sizing: border-box;
 }
-#cuppaDatePickerBanner, #cuppaDatePicker{
+#cuppaDatePickerContainer, #cuppaDatePicker{
 	width: 250px;
     text-align: center;
     margin: 0px auto;
@@ -192,7 +192,7 @@ body{
 .winkel-calendar table{
 	width: 100%;
 	text-align: center;
-    font-size: 16px;
+    font-size: 18px;
     border-collapse: collapse;
 }
 .winkel-calendar table td{

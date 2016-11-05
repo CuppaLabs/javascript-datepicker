@@ -69,4 +69,12 @@ iframe{
     .datepicker-container {
         padding: 80px 15px;
     }
+    .bt-group{
+          padding: 35px 0px;
+    }
+}
+.bt-group .btn{
+  background: -webkit-linear-gradient(#42a1ec, #0070c9);
+  background: -o-linear-gradient(#42a1ec, #0070c9);
+  background: linear-gradient(#42a1ec, #0070c9);
 }

@@ -48,7 +48,7 @@
 		 this.defaults = {
 				defaultDate : new Date(),
 				bigBanner: true,
-				format : "dd/mm/yyyy",
+				format : "DD/MM/YYYY",
 				onSelect : null
 			}
 		  if (!this.options) {
@@ -118,8 +118,8 @@
 	}
 	WinkelCalendar.prototype.setDateVal = function(){
 		    this.selectedDate = new Date(this.date);
-			this.el.dateContainer.textContainer.textContent = moment(this.selectedDate).format('DD/MM/YYYY');
-			this.el.inputContainer.value = moment(this.selectedDate).format('DD/MM/YYYY');
+			this.el.dateContainer.textContainer.textContent = moment(this.selectedDate).format(this.options.format);
+			this.el.inputContainer.value = moment(this.selectedDate).format(this.options.format);
 	}
 	WinkelCalendar.prototype.setDate = function(val){
 		    this.date = new Date(val);
