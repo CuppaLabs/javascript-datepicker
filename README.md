@@ -1,5 +1,7 @@
 # Cuppa DatePicker
-Cool Responsive Javascript Datepicker for Web and Mobile.
+[![npm version](https://img.shields.io/npm/v/bootstrap.svg)](https://www.npmjs.com/package/cuppa-datepicker)
+
+Cuppa Datepicker is a cool responsive Javascript Datepicker for Web and Mobile.
 
 ## Demo
 
@@ -8,7 +10,10 @@ View the [Demo here](https://cuppalabs.github.io/javascript-datepicker/) of Date
 ![www.cuppalabs.com](https://raw.githubusercontent.com/CuppaLabs/javascript-datepicker/master/images/datepicker-banner.png)
 
 ## Getting Started
+- Install with [npm](https://www.npmjs.com): `npm install cuppa-datepicker`
 
+#### 				OR
+#### Steps to Download git repositroy and setup
 #### 1. Add Datepicker Library
 Include the `cuppa-datepicker.js` script file in the `<head>` section or at the bottom of your html page.
 ```html
