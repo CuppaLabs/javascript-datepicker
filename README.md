@@ -5,4 +5,47 @@ Cool Responsive Javascript Datepicker for Web and Mobile.
 
 View the [Demo here](https://cuppalabs.github.io/javascript-datepicker/) of Date Picker.
 
+## Getting Started
+
+**1.** Include the `cuppa-datepicker.js` script file in the `<head>` section or at the bottom of your html page.
+```html
+<script src="cuppa-datepicker.js" type="text/javascript"></script>
+```
+
+**2.** Include the CSS file in `<head>` section of your page.
+```html
+<link href="cuppa-datepicker-styles.css" rel="stylesheet">
+```
+**3.** Initialize datepicker component with the following script
+
+```js
+var cal = new WinkelCalendar({
+		container: 'cuppaDatePickerContainer',
+		bigBanner: true,
+		defaultDate: '2016-1-12',
+		format : "DD-MM-YYYY",
+		onSelect : onDateChange	
+});	
+
+```
+**4.** HTML container where the datepicker to be rendered
+```html
+<div id="cuppaDatePickerContainer"></div>
+```
+
 ## Documentation
+
+## API
+
+Options can be passed as a JSON to the datepicker 
+
+|Property|Type|Required|Default|Description|
+|:--- |:--- |:--- |:--- |:--- |
+|`container`|string|YES|`''`| ID of the container in which the datepicker needs to be initialized|
+|`defaultDate`|string|Optional|`Today Date`|Date to show on load of the component. If not set todays date will be show as default.|
+|`format`|string|Optional|`DD/MM/YYYY`|Date format of the calendar. This will be bound to the model as the date's value.|
+|`bigBanner`|boolean|optional|`true`|Set to `true` to have a cool banner above the month table. Set false to have a simple datepicker|
+
+## Licence
+
+This project is licensed under the MIT license. See the [LICENSE](LICENSE) file for more info.
