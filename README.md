@@ -1,4 +1,5 @@
-# Cool Responsive Javascript Datepicker for Web and Mobile.
+# Cuppa DatePicker
+Cool Responsive Javascript Datepicker for Web and Mobile.
 
 ## Demo
 
