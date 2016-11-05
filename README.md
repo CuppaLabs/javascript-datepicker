@@ -7,19 +7,18 @@ View the [Demo here](https://cuppalabs.github.io/javascript-datepicker/) of Date
 
 ## Getting Started
 
-#### Add Datepicker Library
+#### 1. Add Datepicker Library
 Include the `cuppa-datepicker.js` script file in the `<head>` section or at the bottom of your html page.
 ```html
 <script src="cuppa-datepicker.js" type="text/javascript"></script>
 ```
-#### CSS
+#### 2. CSS
 Include the CSS file in `<head>` section of your page.
 ```html
 <link href="cuppa-datepicker-styles.css" rel="stylesheet">
 ```
 
-#### Initialize
-
+#### 3. Initialize
 Initialize datepicker component with the following script
 
 ```js
@@ -32,12 +31,12 @@ var cal = new WinkelCalendar({
 });	
 
 ```
-#### HTML
+#### 4. HTML
 HTML container where the datepicker to be rendered
 ```html
 <div id="cuppaDatePickerContainer"></div>
 ```
-#### External Dependencies
+#### 5. External Dependencies
 
 We have font awesome icons and moment.js as dependencies for the component. Don't forget to include the following dependencies.
 
