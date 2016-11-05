@@ -1,10 +1,29 @@
 {
-  "name": "Cuppa-DatePicker",
+  "name": "cuppa-datepicker",
   "version": "1.0.0",
-  "scripts":{
-      "start":"node app.js"
+  "description": "A cool javascript datepicker component for mobile and web.",
+  "scripts": {
+    "start": "node app.js"
   },
+  "keywords": [
+    "datepicker",
+    "javascript",
+    "mobile datepicker"
+  ],
+  "author": "Pradeep Kumar Terli solomon.terli@gmail.com http://www.cuppalabs.com",
   "dependencies": {
-    "express": "^4.11.0"
-  }
+    "express": "^4.11.0",
+    "moment": "~2.15.2"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CuppaLabs/javascript-datepicker.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CuppaLabs/javascript-datepicker/issues"
+  },
+  "homepage": "https://github.com/CuppaLabs/javascript-datepicker#readme"
 }
