@@ -52,11 +52,11 @@ We have font awesome icons and moment.js as dependencies for the component. Don'
 <script src="https://cdn.jsdelivr.net/momentjs/2.15.2/moment.min.js"></script>
 ```
 
-## Documentation
+## API Documentation
 
-## API
+## Configuration
 
-Options can be passed as a JSON to the datepicker 
+Following options can be passed as a JSON config object to the datepicker 
 
 |Property|Type|Required|Default|Description|
 |:--- |:--- |:--- |:--- |:--- |
