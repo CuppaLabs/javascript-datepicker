@@ -67,32 +67,32 @@ Following options can be passed as a JSON config object to the datepicker
 |`onSelect`|function/method|optional|`none`|Callback method to call on select of date.|
 
 ## Methods
-`setDate(String dateString)`
+- `setDate(String dateString)`
 
-Sets the date to the value passed as parameter.
+	Sets the date to the value passed as parameter.
 
-Parameter
-- dateString: String
+	Parameter
+	- dateString: String
 
-Example : setDate('06-11-2016')
+	Example : setDate('06-11-2016')
 
-`today()`
+- `today()`
 
-Sets the date to todays's date.
+	Sets the date to todays's date.
 
-Example : today()
+	Example : today()
 
-`open()`
+- `open()`
 
-Opens the datepicker popover.
+	Opens the datepicker popover.
 
-`close()`
+- `close()`
 
-Closes the datepicker popover.
+	Closes the datepicker popover.
 
 ## Events
 
-`onSelect`
+- `onSelect`
 
 Define a callback method to call on select of the date.
 
