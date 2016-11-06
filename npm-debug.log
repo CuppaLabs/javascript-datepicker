@@ -7,6 +7,7 @@
 3 info using node@v4.4.7
 4 info git [ 'status', '--porcelain' ]
 5 verbose stack Error: Git working directory not clean.
+5 verbose stack D images/datepicker-banner.psd
 5 verbose stack     at C:\Users\solomon301.Pradeep\AppData\Roaming\npm\node_modules\npm\lib\version.js:247:19
 5 verbose stack     at C:\Users\solomon301.Pradeep\AppData\Roaming\npm\node_modules\npm\lib\utils\no-progress-while-running.js:21:8
 5 verbose stack     at ChildProcess.exithandler (child_process.js:204:7)
@@ -23,6 +24,7 @@
 9 error node v4.4.7
 10 error npm  v3.10.9
 11 error Git working directory not clean.
+11 error D images/datepicker-banner.psd
 12 error If you need help, you may report this error at:
 12 error     <https://github.com/npm/npm/issues>
 13 verbose exit [ 1, true ]
