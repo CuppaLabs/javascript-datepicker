@@ -64,6 +64,45 @@ Options can be passed as a JSON to the datepicker
 |`defaultDate`|string|Optional|`Today Date`|Date to show on load of the component. If not set todays date will be show as default.|
 |`format`|string|Optional|`DD/MM/YYYY`|Date format of the calendar. This will be bound to the model as the date's value.|
 |`bigBanner`|boolean|optional|`true`|Set to `true` to have a cool banner above the month table. Set false to have a simple datepicker|
+|`onSelect`|function/method|optional|`none`|Callback method to call on select of date.|
+
+## Methods
+`setDate(String dateString)`
+
+Sets the date to the value passed as parameter.
+
+Parameter
+- dateString: String
+
+Example : setDate('06-11-2016')
+
+`today()`
+
+Sets the date to todays's date.
+
+Example : today()
+
+`open()`
+
+Opens the datepicker popover.
+
+`close()`
+
+Closes the datepicker popover.
+
+## Events
+
+`onSelect`
+
+Define a callback method to call on select of the date.
+
+Example : 
+
+```js
+var cal = new WinkelCalendar({
+		onSelect : onDateChange	
+});	
+```
 
 ## Licence
 
