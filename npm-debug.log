@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Users\\solomon301.Pradeep\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'version',
+1 verbose cli   'patch' ]
+2 info using npm@3.10.9
+3 info using node@v4.4.7
+4 info git [ 'status', '--porcelain' ]
+5 verbose stack Error: Git working directory not clean.
+5 verbose stack     at C:\Users\solomon301.Pradeep\AppData\Roaming\npm\node_modules\npm\lib\version.js:247:19
+5 verbose stack     at C:\Users\solomon301.Pradeep\AppData\Roaming\npm\node_modules\npm\lib\utils\no-progress-while-running.js:21:8
+5 verbose stack     at ChildProcess.exithandler (child_process.js:204:7)
+5 verbose stack     at emitTwo (events.js:87:13)
+5 verbose stack     at ChildProcess.emit (events.js:172:7)
+5 verbose stack     at maybeClose (internal/child_process.js:827:16)
+5 verbose stack     at Socket.<anonymous> (internal/child_process.js:319:11)
+5 verbose stack     at emitOne (events.js:77:13)
+5 verbose stack     at Socket.emit (events.js:169:7)
+5 verbose stack     at Pipe._onclose (net.js:486:12)
+6 verbose cwd C:\Users\solomon301.Pradeep\Documents\projects\javascript-datepicker
+7 error Windows_NT 10.0.14393
+8 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Users\\solomon301.Pradeep\\AppData\\Roaming\\npm\\node_modules\\npm\\bin\\npm-cli.js" "version" "patch"
+9 error node v4.4.7
+10 error npm  v3.10.9
+11 error Git working directory not clean.
+12 error If you need help, you may report this error at:
+12 error     <https://github.com/npm/npm/issues>
+13 verbose exit [ 1, true ]
