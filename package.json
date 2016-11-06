@@ -1,6 +1,6 @@
 {
   "name": "cuppa-datepicker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A cool javascript datepicker component for mobile and web.",
   "scripts": {
     "start": "node app.js"
