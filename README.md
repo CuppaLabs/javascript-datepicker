@@ -6,6 +6,7 @@ Cuppa Datepicker is a cool responsive Javascript Datepicker for Web and Mobile. 
 ## Demo
 
 View the [Demo here](https://cuppalabs.github.io/javascript-datepicker/) of Date Picker.
+[Click here](https://jsfiddle.net/solomon301/s3hL05s6/) for JSFiddle.
 
 ![www.cuppalabs.com](https://raw.githubusercontent.com/CuppaLabs/javascript-datepicker/master/images/datepicker-banner.png)
 
