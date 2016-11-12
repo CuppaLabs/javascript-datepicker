@@ -1,5 +1,5 @@
 # Cuppa DatePicker
-[![npm version](https://img.shields.io/npm/v/bootstrap.svg)](https://www.npmjs.com/package/cuppa-datepicker)
+[![npm version](https://img.shields.io/npm/v/cuppa-datepicker.svg)](https://www.npmjs.com/package/cuppa-datepicker)
 
 Cuppa Datepicker is a cool responsive Javascript Datepicker for Web and Mobile. Developed by [Cuppa Labs](http://www.cuppalabs.com).
 
