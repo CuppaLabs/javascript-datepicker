@@ -231,8 +231,6 @@
 			this.el.calendarPopup.yearsView.yearsList[k].setAttribute('value',startYear + k);
 			this.el.calendarPopup.yearsView.yearsList[k].textContent = startYear + k;	
 		}
-			
-
 	}
 	WinkelCalendar.prototype.setNextYearList = function(){
 		var startYear = parseInt(this.el.calendarPopup.yearsView.yearsList[8].textContent) + 1;
