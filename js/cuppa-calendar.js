@@ -481,8 +481,8 @@
 
 	}
 
-	WinkelCalendar.prototype.onCalendarClick = function(e){
-		e.stopPropagation();
+	WinkelCalendar.prototype.onCalendarClick = function(event){
+		event.stopPropagation();
 		var self = this;
 		var elem = self.el;
 		if(event.target.parentElement.hasOwnProperty('isDate') && event.target.innerHTML != ""){
