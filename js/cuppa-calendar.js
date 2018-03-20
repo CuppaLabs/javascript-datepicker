@@ -3,16 +3,12 @@
 
 
 	// these are labels for the days of the week
-	var cal_days_labels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
-	var cal_full_days_lables = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+	var cal_days_labels = moment.weekdaysShort();
+	var cal_full_days_lables = moment.weekdays();
 
 	// these are human-readable month name labels, in order
-	var cal_months_labels = ['January', 'February', 'March', 'April',
-	                     'May', 'June', 'July', 'August', 'September',
-	                     'October', 'November', 'December'];
-	var cal_months_labels_short = ['JAN', 'FEB', 'MAR', 'APR',
-		                     'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
-		                     'OCT', 'NOV', 'DEC'];
+	var cal_months_labels = moment.months();
+	var cal_months_labels_short = moment.monthsShort();
 
 	// these are the days of the week for each month, in order
 	var cal_days_in_month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -362,7 +358,6 @@
 			  
 			  self.el.bigBanner.appendChild(self.el.bigBanner.monthAndYear);
 			  self.el.calendarPopup.appendChild(self.el.bigBanner);
-			  console.log(self);
 		  }
 		  self.el.headerDetails = document.createElement('div');
 		  self.el.headerDetails.setAttribute('class','wc-details');
@@ -529,7 +524,6 @@
 			self.date.setMonth(self.date.getMonth() - 1);
 		}
 		
-		console.log(this.date);
 		self.updateHeader();
 		self.destroyDaysTable();
 		self.createDaysView();

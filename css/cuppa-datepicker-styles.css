@@ -305,6 +305,7 @@ body{
     }
     .wc-month-row > div:nth-child(1), .wc-year-row > div:nth-child(1){
         line-height: 28px;
+        text-transform: uppercase;
     }
     .wc-prev, .wc-next{
         font-size: 18px;
